@@ -13,6 +13,16 @@ app.use(helmet.hsts({
   maxAge: 90 * 24 * 60 * 60, // can use variable/90 days in seconds
   force: true}
 ));
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.noCache());
+app.use(helmet.contentSecurityPolicy(
+    {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", 'trusted-cdn.com'],
+        }
+    }
+));
 
 
 
